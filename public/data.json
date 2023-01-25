@@ -1,0 +1,13 @@
+[
+    {
+        "id": 1,
+        "username": "giorgi",
+        "password": "123456",
+        "firstname": "giorgi",
+        "lastname": "giortgi",
+        "day": 3,
+        "mounth":3,
+        "year": 1900,
+        "country": "Georgia"
+    }
+]

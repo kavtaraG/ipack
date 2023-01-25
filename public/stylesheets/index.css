@@ -1,0 +1,41 @@
+html{
+    box-sizing: border-box;
+}
+
+body{
+    background-color: whitesmoke;
+
+}
+
+header{
+    background-color: rgba(0, 0, 0, 0.157);
+    padding: 3%;
+    padding-left: 90%;
+}
+
+#btn{
+    padding: 3%;
+    border-radius: 15%;
+}
+
+input{
+    padding: 0.5%;
+    border-radius: 5px;
+}
+
+h2{
+    text-align: center;
+}
+
+#item{
+    display: grid;
+    display: inline-grid;
+    grid-template-columns: auto auto auto;
+    gap: 50px;
+    text-align: center;
+    padding: 5%;
+} 
+
+#content{
+
+}

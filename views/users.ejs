@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    
+    <button onclick="location='/dashboard'"> Dashboard</button>&nbsp;|&nbsp; 
+    <button onclick="location='/customer'"> Customer</button>&nbsp;|&nbsp; 
+    <button onclick="location='/about'"> About</button>&nbsp;|&nbsp; 
+    <button onclick="location='/login'"> Logout</button>&nbsp;|&nbsp; 
+    <hr/><br/>
+<script>
+const doEdit =  (id)=>{
+  
+        location = '/users_table/edit/'+id;
+      }
+
+  const doDelete = async (id) => {
+    await fetch('/api/v1/users', {
+        method: 'DELEtE', // or 'PUT'
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({id}),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // console.log('Success:', data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+        location='/users_table'
+  }
+</script>
+<div>
+  <a href="/sing_up">back</a><br>
+</div>
+    <div class="page-data">
+        <div class="data-table">
+           <table border="1" cellpadding="7" cellspacing="7">
+               <tr>
+                   <th width="20px">No</th>
+                   <th width="250px">Username</th>
+                   <th width="220px">Password</th>
+                   <th width="100px">First name</th>
+                   <th width="300px">Last name</th>
+                   <th width="300px">Day</th>
+                   <th width="300px">Mounth</th>
+                   <th width="300px">Year</th>
+                   <th width="300px">Country</th>
+                   <th>Edit</th>
+                   <th>Delete</th>
+               </tr>
+               <% if(data.length){for(var i = 0;i < data.length;i++) { %>       
+               <tr>
+                   <td><%=data[i].id%></td>
+                   <td><%=data[i].username%></td>
+                   <td><%=data[i].password%></td>
+                   <td><%=data[i].firstname%></td>
+                   <td><%=data[i].lastname%></td>
+                   <td><%=data[i].day%></td>
+                   <td><%=data[i].mounth%></td>
+                   <td><%=data[i].year%></td>
+                   <td><%=data[i].country%></td>
+                   <td><button onclick="doEdit('<%=data[i].id%>');" >Edit</button></td>
+                   <td><button onclick="doDelete('<%=data[i].id %>');">Delete</button></td>
+               </tr>
+           <% }
+            }else{ %>
+                <tr>
+                   <td colspan="7">No user found</td>
+                </tr>
+           <% } %> 
+           </table>
+        </div>
+       </div>
+
+  </body>
+</html>
+

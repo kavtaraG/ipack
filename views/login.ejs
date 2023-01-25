@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/login.css">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const doLogin = () => {
+            let username = document.getElementById('username').value;
+            let password = document.getElementById('password').value;
+            const data = {username, password};
+            const response = fetch('/users/login', {
+                method: 'POST', // or 'PUT'
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    // console.log('Success:', data);
+                    return data;
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+            if(response.status = 'ok'){
+                location='/'
+            }else{
+                alert('denied');
+            }
+
+        }
+        
+    </script>
+    <div id="main-div">
+        <div id="log-div">
+            <label for="Username">Username: </label>
+            <input id="username" placeholder="Username"><br><br>
+            <label for="password">Password: </label>
+            <input id="password" type="password" placeholder="Password"><br><br>
+            <input value="Login" type="button" onclick="doLogin()">
+            <input value="Cancel" type="button" onclick="location='/'">
+        </div>
+        <div id="reg-div">
+            <p> If you are not register please <a href="/sing_up">Sing up</a></p>
+        </div>
+    </div>
+    
+</body>
+</html>
