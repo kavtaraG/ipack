@@ -7,21 +7,41 @@ const http = require('http');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 
-dotenv.config({path: './config.env'});
 
-const DB = process.env.DB.replace('<PASSWORD>', process.env.PASSWORD);
+const Users = require('./model/usersSchema');
+
+dotenv.config({path: './config.env'});
+mongoose.set('strictQuery', true);
+
+// const DB = process.env.DB.replace('<PASSWORD>', process.env.PASSWORD);
 
 mongoose.connect(process.env.DATABASE_LOCAL).then((con) => {
   //console.log(con.connections);
   console.log('DB connection success');
-})
+});
 
+console.log(Users);
+const session = require('cookie-session');
 var indexRouter = require('./routes/index');
+var secureRouter = require('./routes/secue-pages');
 var usersRouter = require('./routes/users');
 var usersApi = require('./routes/usersApi');
+var storeApi = require('./routes/storeApi');
 
 
 var app = express();
+
+var sess = {
+  // name:'connect.sid',
+  name: 'connect.sid.sig',
+  secret: 'keyboard cat',
+  resave: true,
+  proxy: true,
+  saveUninitialized: true,
+  cookie: { }
+};
+
+app.use(session(sess));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -37,7 +57,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+//checkpoint
+app.use((req, res, next) => {
+  if(req.session.user && req.session.user.length > 2){
+    next();
+  }else{
+    res.redirect('/login');
+  }
+})
+
+//security
+app.use('/', secureRouter);
 app.use('/api/v1/users', usersApi);
+app.use('/api/v1/store', storeApi);
 
 
 // catch 404 and forward to error handler
@@ -61,7 +94,7 @@ const server = http.createServer(app);
 
 server.listen(PORT, () => {
   process.on('uncaughtException', (err) => {
-    if(err) throw err;
+    // if(err) throw err;
   })
   console.log('listening to the port:'+PORT);
 })

@@ -1,44 +1,38 @@
 const express = require('express');
 const app = express.Router();
-const { getUsers, getUsersById, addUsers, updateUsers, deleteUsers } = require('../controllers/usersData');
-
-// let data = [ {
-//     "id": 1,
-//     "username": "giorgi",
-//     "password": "123456",
-//     "firstname": "giorgi",
-//     "lastname": "giortgi",
-//     "day": 3,
-//     "mounth":3,
-//     "year": 1900,
-//     "country": "Georgia"
-// }];
+const Users = require('../model/usersSchema')
+const { getUsers, getUsersById, addUsers, updateUsers, deleteUsers } = require('../controllers/usersMongo');
 
 
-app.get('/', (req, res, next) => {
-    res.send(getUsers());
-});
 
-app.get('/:id', (req, res, next) => {
-   res.send(getUsersById(req.params.id));
+
+app.get('/', async (req, res, next) => {
+    //await Users.find().then((result) => {
+        res.send(await getUsers());
+    });
+
+app.get('/:id', async (req, res, next) => {
+   res.send(await getUsersById(req.params.id));
     
 });
 
-app.post('/', (req, res, next) => {
+app.post('/', async (req, res, next) => {
     let rec = req.body;
+    // const addUsers = await Users.create(rec);
+    // console.log(addUsers);
     addUsers(rec);
     res.send({status: 'ok', msf: 'added success'});
 });
 
-app.put('/', (req, res, next) => {
+app.put('/', async (req, res, next) => {
     const rec = req.body;
-    updateUsers(rec);
+    await updateUsers(rec);
     
     res.send({status: 'ok', msg: 'update success'});
 });
 
-app.delete('/', (req, res, next) => {
-    deleteUsers(req.body.id);
+app.delete('/', async (req, res, next) => {
+    await deleteUsers(req.body.id);
     res.send({result:'ok',msg:'record deleted successfully'});
 });
 

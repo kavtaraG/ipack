@@ -8,11 +8,11 @@
 </head>
 <body>
     <script>
-        const doLogin = () => {
+        const doLogin = async () => {
             let username = document.getElementById('username').value;
             let password = document.getElementById('password').value;
-            const data = {username, password};
-            const response = fetch('/users/login', {
+            let data = {username, password};
+            let response = await fetch('/users/login', {
                 method: 'POST', // or 'PUT'
                 headers: {
                     'Content-Type': 'application/json',
@@ -27,11 +27,12 @@
                 .catch((error) => {
                     console.error('Error:', error);
                 });
-            if(response.status = 'ok'){
+            if(response.result == 'ok'){
                 location='/'
             }else{
                 alert('denied');
             }
+            
 
         }
         

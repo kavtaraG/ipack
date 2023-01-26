@@ -1,4 +1,6 @@
+const Users = require("../model/usersSchema");
 
+//const Users = require('../model/usersSchema')
 let data = [ {
     "id": 1,
     "username": "giorgi",
@@ -11,7 +13,7 @@ let data = [ {
     "country": "Georgia"
 }];
 
-const getUsers = () => (data);
+const getUsers = async() => (data);
 
 const getUsersById = (id) => {
     let temp = data.filter((item) => (item.id == id));
@@ -22,7 +24,8 @@ const getUsersById = (id) => {
     };
 };
 
-const addUsers = (record) => {
+const addUsers = async (record) => {
+   
     record.id = Date.now();
     data.push(record);
 }

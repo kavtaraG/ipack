@@ -1,15 +1,16 @@
 <!DOCTYPE html>
+<html lang="en"></html>
 <html>
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/index.css' />
   </head>
   <body>
-
     <header>
       <div id="log-div">
         <input id="btn" type="button" value="Login" onclick="location='/login'">
         <input id="btn" type="button" value="Sing in" onclick="location='/sing_up'">
+        <%= users %>
       </div>
     </header>
     <h1><%= title %></h1>
