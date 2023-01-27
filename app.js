@@ -22,11 +22,15 @@ mongoose.connect(process.env.DATABASE_LOCAL).then((con) => {
 
 console.log(Users);
 const session = require('cookie-session');
+
 var indexRouter = require('./routes/index');
+var singupRouter = require('./routes/index');
 var secureRouter = require('./routes/secue-pages');
 var usersRouter = require('./routes/users');
+var userTable = require('./routes/secue-pages');
 var usersApi = require('./routes/usersApi');
 var storeApi = require('./routes/storeApi');
+
 
 
 var app = express();
@@ -57,6 +61,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/sing_uo', singupRouter);
 
 //checkpoint
 app.use((req, res, next) => {
@@ -69,6 +74,7 @@ app.use((req, res, next) => {
 
 //security
 app.use('/', secureRouter);
+app.use('/users_table', userTable);
 app.use('/api/v1/users', usersApi);
 app.use('/api/v1/store', storeApi);
 

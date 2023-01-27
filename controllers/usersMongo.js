@@ -2,8 +2,15 @@
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 const ObjectId = require('mongodb').ObjectID;
+const dotenv = require('dotenv');
 
-const dbName = 'nodejs';
+dotenv.config({path: '../config.env'});
+
+
+
+// const dbName = 'nodejs';
+// const dbName = process.env.DBNAME;
+const dbName = process.env.DATABASE_LOCAL;
 const url = 'mongodb://localhost:27017';
 
 const getUsers = function(){ 
@@ -12,7 +19,7 @@ const getUsers = function(){
     function(err, client) {
     assert.equal(null, err);
     const db = client.db(dbName);
-      db.collection('customers').find().toArray(function (err, result) {
+      db.collection('users').find().toArray(function (err, result) {
         if (err) throw err
         //console.log(result);
         client.close();
@@ -27,7 +34,7 @@ const getUsersCallback = function(callback){
     function(err, client) {
     assert.equal(null, err);
     const db = client.db(dbName);
-      db.collection('customers').find().toArray(function (err, result) {
+      db.collection('users').find().toArray(function (err, result) {
         if (err) throw err
         console.log(result);
         callback(result);
@@ -43,7 +50,7 @@ const getUsersById = function(id){
     MongoClient.connect(url,{ useNewUrlParser: true,useUnifiedTopology: true }, function(err, client) {
     assert.equal(null, err);
     const db = client.db(dbName);
-      db.collection('customers').find({"_id" : ObjectId(id)}).toArray(function (err, result) {
+      db.collection('users').find({"_id" : ObjectId(id)}).toArray(function (err, result) {
         if (err) throw err
         console.log(result);
         resolve(result[0]);
@@ -58,9 +65,9 @@ const addUsers = function(record) {
   MongoClient.connect(url, { useNewUrlParser: true,useUnifiedTopology: true },function(err, client) {
     assert.equal(null, err);
     const db = client.db(dbName);
-    const collection = db.collection('customers');
+    const collection = db.collection('users');
     collection.insertMany([record],function(err,result){
-      resolve({result:'success'});
+      resolve({status:'ok'});
       client.close();
     });
     });
@@ -72,9 +79,9 @@ const deleteUsers = function(id){
   MongoClient.connect(url, { useNewUrlParser: true,useUnifiedTopology: true },function(err, client) {
     assert.equal(null, err);
     const db = client.db(dbName);
-    const collection = db.collection('customers');
+    const collection = db.collection('users');
     collection.deleteOne({"_id" : ObjectId(id)},function(err,result){
-      resolve({result:'success'});
+      resolve({status:'ok'});
       client.close()
     });
      });
@@ -88,9 +95,9 @@ const updateUsers = function(customer){
     MongoClient.connect(url, { useNewUrlParser: true,useUnifiedTopology: true },function(err, client) {
     assert.equal(null, err);
     const db = client.db(dbName);
-    const collection = db.collection('customers');
+    const collection = db.collection('users');
     collection.updateOne({"_id" : ObjectId(id)},{ $set: customer },function(err,result){
-      resolve({result:'success'});
+      resolve({status:'ok'});
       client.close();
        });
     });
@@ -108,7 +115,7 @@ const getUsersBySearch = function(field,searchText){
     MongoClient.connect(url,{ useNewUrlParser: true }, function(err, client) {
     assert.equal(null, err);
     const db = client.db(dbName);
-      db.collection('customers').find({[field]:{'$regex' : searchText, '$options' : 'i'}}).toArray(function (err, result) {
+      db.collection('users').find({[field]:{'$regex' : searchText, '$options' : 'i'}}).toArray(function (err, result) {
         if (err) throw err
         console.log("result:"+JSON.stringify(result));
         resolve(result);
@@ -125,7 +132,7 @@ const getCustomersBySearchOLD = function(searchParam){
     MongoClient.connect(url,{ useNewUrlParser: true,useUnifiedTopology: true }, function(err, client) {
     assert.equal(null, err);
     const db = client.db(dbName);
-      db.collection('customers').find({name: /vivek/i}).toArray(function (err, result) {
+      db.collection('users').find({name: /vivek/i}).toArray(function (err, result) {
         if (err) throw err
         console.log("result:"+JSON.stringify(result));
         resolve(result);

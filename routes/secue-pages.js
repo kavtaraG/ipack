@@ -20,13 +20,6 @@ router.get('/', function(req, res, next) {
   res.redirect('/login');
   //res.render('index', { title: 'Express', users: req.session.user });
 });
-
-router.get('/sing_up', function(req, res, next) {
-    let users = {};
-    method = 'POST';
-    res.render('register', { buttonName: 'Submit', users, method, 
-    day: dayMap, mounth: mounthMap, year: yearMap, country: countryMap });
-  });
   
   router.get('/users_table', async function(req, res, next) {
     res.render('users', { data: await getUsers() });

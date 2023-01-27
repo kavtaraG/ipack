@@ -21,7 +21,7 @@ app.post('/', async (req, res, next) => {
     // const addUsers = await Users.create(rec);
     // console.log(addUsers);
     addUsers(rec);
-    res.send({status: 'ok', msf: 'added success'});
+    res.send({status: 'ok', msg: 'added success'});
 });
 
 app.put('/', async (req, res, next) => {
