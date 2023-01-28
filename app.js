@@ -16,7 +16,8 @@ mongoose.set('strictQuery', true);
 // const DB = process.env.DB.replace('<PASSWORD>', process.env.PASSWORD);
 
 mongoose.connect(process.env.DATABASE_LOCAL).then((con) => {
-  //console.log(con.connections);
+  
+  console.log(con.connections);
   console.log('DB connection success');
 });
 
@@ -25,11 +26,17 @@ const session = require('cookie-session');
 
 var indexRouter = require('./routes/index');
 var singupRouter = require('./routes/index');
+var logoutRouter = require('./routes/index');
 var secureRouter = require('./routes/secue-pages');
 var usersRouter = require('./routes/users');
 var userTable = require('./routes/secue-pages');
+var storeTable = require('./routes/secue-pages');
 var usersApi = require('./routes/usersApi');
 var storeApi = require('./routes/storeApi');
+//partials
+var item1Router = require('./routes/secue-pages');
+var item2Router = require('./routes/secue-pages');
+var item3Router = require('./routes/secue-pages');
 
 
 
@@ -62,6 +69,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/sing_uo', singupRouter);
+app.use('/logut', logoutRouter);
+//test
+app.use('/api/v1/store', storeApi);
+app.use('/item_1', item1Router);
+app.use('/item_2', item2Router);
+app.use('/item_3', item3Router);
 
 //checkpoint
 app.use((req, res, next) => {
@@ -75,8 +88,12 @@ app.use((req, res, next) => {
 //security
 app.use('/', secureRouter);
 app.use('/users_table', userTable);
+app.use('/store_table', storeTable);
 app.use('/api/v1/users', usersApi);
-app.use('/api/v1/store', storeApi);
+//app.use('/api/v1/store', storeApi);
+//app.use('/item_1', item1Router);
+//app.use('/item_2', item2Router);
+//app.use('/item_3', item3Router);
 
 
 // catch 404 and forward to error handler

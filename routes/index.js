@@ -27,9 +27,15 @@ router.get('/login', function(req, res, next) {
 
 router.get('/sing_up', function(req, res, next) {
   let users = {};
-  method = 'POST';
-  res.render('register', { buttonName: 'Submit', users, method, 
-  day: dayMap, mounth: mounthMap, year: yearMap, country: countryMap });
+  //method = 'POST';
+  res.render('register', { buttonName: 'Submit', users, day: dayMap,
+   mounth: mounthMap, year: yearMap, country: countryMap });
+});
+
+//log out
+router.get('/logout', function(req, res, next) {
+  delete(req.session.user);
+  res.render('logout', { title: 'Express' });
 });
 
 module.exports = router;

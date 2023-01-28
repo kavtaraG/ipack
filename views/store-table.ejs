@@ -15,11 +15,11 @@
 <script>
 const doEdit =  (id)=>{
   
-        location = '/users_table/edit/'+id;
+        location = '/store_table/edit/'+id;
       }
 
   const doDelete = async (id) => {å
-    await fetch('/api/v1/users', {
+    await fetch('/api/v1/store', {
         method: 'DELEtE', // or 'PUT'
         headers: {
           'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ const doEdit =  (id)=>{
         .catch((error) => {
           console.error('Error:', error);
         });
-        location='/users_table'
+        location='/store_table'
   }
 </script>
 <div>
@@ -44,20 +44,17 @@ const doEdit =  (id)=>{
            <table border="1" cellpadding="7" cellspacing="7">
                <tr>
                    <th width="20px">No</th>
-                   <th width="250px">Username</th>
-                   <th width="220px">Password</th>
-                   <th width="100px">First name</th>
-                   <th width="300px">Last name</th>
-                   <th width="300px">Day</th>
-                   <th width="300px">Mounth</th>
-                   <th width="300px">Year</th>
-                   <th width="300px">Country</th>
+                   <th width="250px">Band name</th>
+                   <th width="220px">Origin</th>
+                   <th width="100px">Items</th>
+                   <th width="300px">Price</th>
+                   <th width="300px">Ordered items</th>
                    <th>Edit</th>
                    <th>Delete</th>
                </tr>
                <% if(data.length){for(var i = 0;i < data.length;i++) { %>       
                <tr>
-                   <td><%=data[i]._id%></td>
+                   <td><%=data[i].id%></td>
                    <td><%=data[i].username%></td>
                    <td><%=data[i].password%></td>
                    <td><%=data[i].firstname%></td>
@@ -66,8 +63,8 @@ const doEdit =  (id)=>{
                    <td><%=data[i].mounth%></td>
                    <td><%=data[i].year%></td>
                    <td><%=data[i].country%></td>
-                   <td><button onclick="doEdit('<%=data[i]._id%>');" >Edit</button></td>
-                   <td><button onclick="doDelete('<%=data[i]._id %>');">Delete</button></td>
+                   <td><button onclick="doEdit('<%=data[i].id%>');" >Edit</button></td>
+                   <td><button onclick="doDelete('<%=data[i].id %>');">Delete</button></td>
                </tr>
            <% }
             }else{ %>
@@ -81,4 +78,3 @@ const doEdit =  (id)=>{
 
   </body>
 </html>
-

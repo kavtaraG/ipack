@@ -32,7 +32,21 @@ router.get('/', function(req, res, next) {
     day: dayMap, mounth: mounthMap, year: yearMap, country: countryMap   });
   });
 
+  router.get('/store_table', async function(req, res, next) {
+    res.render('store-table', { });
+  });
 
+  //store routes
+  router.get('/item_1', async function(req, res, next) {
+    res.render('item1', { });
+  });
 
+  router.get('/item_2', async function(req, res, next) {
+    res.render('item2', { });
+  });
+
+  router.get('/item_3', async function(req, res, next) {
+    res.render('item3', { });
+  });
 
 module.exports = router;

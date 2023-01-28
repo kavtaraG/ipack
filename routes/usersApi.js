@@ -20,7 +20,7 @@ app.post('/', async (req, res, next) => {
     let rec = req.body;
     // const addUsers = await Users.create(rec);
     // console.log(addUsers);
-    addUsers(rec);
+    await addUsers(rec);
     res.send({status: 'ok', msg: 'added success'});
 });
 

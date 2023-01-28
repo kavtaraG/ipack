@@ -10,7 +10,8 @@ dotenv.config({path: '../config.env'});
 
 // const dbName = 'nodejs';
 // const dbName = process.env.DBNAME;
-const dbName = process.env.DATABASE_LOCAL;
+//const dbName = process.env.DATABASE_LOCAL;
+const dbName = 'users';
 const url = 'mongodb://localhost:27017';
 
 const getUsers = function(){ 

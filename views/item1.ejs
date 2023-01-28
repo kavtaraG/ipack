@@ -1,0 +1,55 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let doAdd = () => {
+            let name = document.getElementById('name').value;
+            let origin = document.getElementById('origin').value;
+            let items = document.getElementById('items').value;
+            let price = document.getElementById('price').value;
+            let quantity = document.getElementById('qnt').value;
+            let data = { name, origin, items, price, quantity };
+            let response = fetch('/api/v1/store', {
+                method: 'POST', // or 'PUT'
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    //console.log('Success:', data);
+                    return data;
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+                if(response.status = 'ok'){
+                    location='/'
+                }
+        }
+    </script>
+    <div id="header-div">
+        <h1>Order Item</h1>
+    </div>
+   <div id="input-div">
+    <div id="img-div">
+        <img src="../images/domestos-thick-bleach-original.jpg" height="300" width="200">
+    </div>
+    <input id="name" value="Domestos" readonly><br><br>
+    <input id="origin"  value="Turckey" readonly><br><br>
+    <input id="items" value="" readonly><br><br>
+    <input id="price" value="6.0 GEL" readonly><br><br>
+    <input id="qnt" value="" placeholder="Enter Quantity Number"><br><br>
+    <input id="btn1" type="button" value="Send" onclick="doAdd()">
+    <input id="btn2" type="button" value="Cancel" onclick="location='/'">
+   </div>
+
+</body>
+</html>

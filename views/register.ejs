@@ -9,7 +9,7 @@
 <body>
     <script>
         let doSubmit =  async () => {
-            let id = ""; <% if(users._id){ %> id = "<%= users._id %>";<% } %>;
+            //let id = ""; <% if(users._id){ %> id = "<%= users._id %>";<% } %>;
             let username = document.getElementById('username').value;
             let password = document.getElementById('password').value;
             let firstName = document.getElementById('firstname').value;
@@ -18,9 +18,9 @@
             let mounth = document.getElementById('select-mounth').value;
             let year = document.getElementById('select-year').value;
             let country = document.getElementById('select-country').value;
-            let data = {id, username, password, firstName, lastName, day, mounth, year, country };
+            let data = { username, password, firstName, lastName, day, mounth, year, country };
             let response = await fetch('/api/v1/users', {
-               method: '<%= method %>', // or 'PUT'
+               method: 'POST', // or 'PUT'
                 headers: {
                     'Content-Type': 'application/json',
                 },
