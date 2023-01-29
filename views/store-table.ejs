@@ -7,9 +7,7 @@
   </head>
   <body>
     
-    <button onclick="location='/dashboard'"> Dashboard</button>&nbsp;|&nbsp; 
-    <button onclick="location='/customer'"> Customer</button>&nbsp;|&nbsp; 
-    <button onclick="location='/about'"> About</button>&nbsp;|&nbsp; 
+    <button onclick="location='/users_table'"> Users Table</button>&nbsp;|&nbsp; 
     <button onclick="location='/login'"> Logout</button>&nbsp;|&nbsp; 
     <hr/><br/>
 <script>
@@ -37,7 +35,7 @@ const doEdit =  (id)=>{
   }
 </script>
 <div>
-  <a href="/sing_up">back</a><br>
+  <a href="/sing_up">back</a><br><br>
 </div>
     <div class="page-data">
         <div class="data-table">
@@ -55,14 +53,11 @@ const doEdit =  (id)=>{
                <% if(data.length){for(var i = 0;i < data.length;i++) { %>       
                <tr>
                    <td><%=data[i].id%></td>
-                   <td><%=data[i].username%></td>
-                   <td><%=data[i].password%></td>
-                   <td><%=data[i].firstname%></td>
-                   <td><%=data[i].lastname%></td>
-                   <td><%=data[i].day%></td>
-                   <td><%=data[i].mounth%></td>
-                   <td><%=data[i].year%></td>
-                   <td><%=data[i].country%></td>
+                   <td><%=data[i].name%></td>
+                   <td><%=data[i].origin%></td>
+                   <td><%=data[i].items%></td>
+                   <td><%=data[i].price%></td>
+                   <td><%=data[i].quantity%></td>
                    <td><button onclick="doEdit('<%=data[i].id%>');" >Edit</button></td>
                    <td><button onclick="doDelete('<%=data[i].id %>');">Delete</button></td>
                </tr>

@@ -21,7 +21,7 @@ const postStore = (record) => {
 const putStore = (record) => {
     store.map((item, index) => {
         if(record.id == item.id){
-            data[index] = record;
+            store[index] = record;
         };
     });
 };

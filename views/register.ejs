@@ -53,7 +53,7 @@
         <input type="password" name="password" id="password" placeholder="Password" value="<%= users.password %>"><br><br>
 
         <label for="fisrt-name">First name: </label>
-        <input type="text" id="firstname" placeholder="John" value="<%= users.firstname %>"><br><br>
+        <input id="firstname" placeholder="John" value="<%= users.firstname %>"><br><br>
 
         <label for="last-name">First name: </label>
         <input type="text" id="lastname" placeholder="Doe" value="<%= users.lastname %>"><br><br>
@@ -61,27 +61,27 @@
         <select id="select-day">
             <option>Day</option>
             <% for(let i = 0; i < day.length; i++) { %>
-            <option id="day" value="<%users.day%>"><%= day[i].day %></option>
+            <option id="day" type="text" value="<%= users.day%>"><%= day[i].day %></option>
             <% } %>
         </select>
         <select id="select-mounth">
             <option>Mounth</option>
             <% for(let i = 0; i < mounth.length; i++) {%>
             
-            <option id="mounth" value="<%= users.mounth %>"> <%= mounth[i].mounth %></option>
+            <option id="mounth" type="text" value="<%= users.mounth %>"> <%= mounth[i].mounth %></option>
             <% } %>
         </select>
         <select id="select-year">
             <option>Year</option>
             <% for(let i = 0; i < year.length; i++) { %>
-            <option id="year" value="<%=users.year %>"><%= year[i].year %></option>
+            <option id="year" type="text" value="<%= users.year %>"><%= year[i].year %></option>
             <% } %>
         </select><br><br>
 
         <select id="select-country">
             <option >Select country</option>
             <% for(let i = 0; i < country.length; i++) { %>
-                <option id="country" value="<%= users.country %>"><%= country[i].text %></option>
+                <option id="country" type="text" value="<%= users.country %>"><%= country[i].text %></option>
             <% } %>
         </select><br><br>
 

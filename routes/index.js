@@ -5,6 +5,7 @@ const fs = require('fs');
 let day = JSON.parse((fs.readFileSync(`${__dirname}/../public/day.json`)));
 let dayMap = day.map((item) => (day, item));
 
+
 let mounth = JSON.parse(fs.readFileSync(`${__dirname}/../public/mounth.json`));
 let mounthMap = mounth.map((item) => (mounth, item));
 

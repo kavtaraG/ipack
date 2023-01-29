@@ -7,9 +7,7 @@
   </head>
   <body>
     
-    <button onclick="location='/dashboard'"> Dashboard</button>&nbsp;|&nbsp; 
-    <button onclick="location='/customer'"> Customer</button>&nbsp;|&nbsp; 
-    <button onclick="location='/about'"> About</button>&nbsp;|&nbsp; 
+    <button onclick="location='/store_table'"> Store Table</button>&nbsp;|&nbsp; 
     <button onclick="location='/login'"> Logout</button>&nbsp;|&nbsp; 
     <hr/><br/>
 <script>
@@ -18,7 +16,7 @@ const doEdit =  (id)=>{
         location = '/users_table/edit/'+id;
       }
 
-  const doDelete = async (id) => {å
+  const doDelete = async (id) => {
     await fetch('/api/v1/users', {
         method: 'DELEtE', // or 'PUT'
         headers: {
@@ -37,7 +35,7 @@ const doEdit =  (id)=>{
   }
 </script>
 <div>
-  <a href="/sing_up">back</a><br>
+  <a href="/sing_up">back</a><br><br>
 </div>
     <div class="page-data">
         <div class="data-table">

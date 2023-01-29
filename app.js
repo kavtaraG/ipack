@@ -6,6 +6,7 @@ var logger = require('morgan');
 const http = require('http');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
+const MongoClient = require('mongodb').MongoClient;
 
 
 const Users = require('./model/usersSchema');
@@ -15,13 +16,38 @@ mongoose.set('strictQuery', true);
 
 // const DB = process.env.DB.replace('<PASSWORD>', process.env.PASSWORD);
 
-mongoose.connect(process.env.DATABASE_LOCAL).then((con) => {
+// mongoose.connect(process.env.DATABASE_LOCAL).then((con) => {
   
-  console.log(con.connections);
-  console.log('DB connection success');
-});
+//   console.log(con.connections);
+//   console.log('DB connection success');
+// });
+const DB_LOCAL = process.env.DATABASE_LOCAL;
+const DB_LOCAL_STORE = process.env.DB_LOCAL_STORE;
 
-console.log(Users);
+//testing mongo database users collection
+MongoClient.connect(DB_LOCAL, {useUnifiedTopology: true}, 
+    (err, client) => {
+        if(err) throw err;
+
+        var db = client.db('users');
+        db.collection('users').find().toArray((err, result) => {
+            if(err) throw err;
+            console.log(result);
+        });
+    });
+//testing mongo database store collection
+    MongoClient.connect(DB_LOCAL_STORE, {useUnifiedTopology: true}, 
+      (err, client) => {
+          if(err) throw err;
+  
+          var db = client.db('users');
+          db.collection('store').find().toArray((err, result) => {
+              if(err) throw err;
+              console.log(result);
+          });
+      });
+
+//console.log(Users);
 const session = require('cookie-session');
 
 var indexRouter = require('./routes/index');
@@ -72,9 +98,9 @@ app.use('/sing_uo', singupRouter);
 app.use('/logut', logoutRouter);
 //test
 app.use('/api/v1/store', storeApi);
-app.use('/item_1', item1Router);
-app.use('/item_2', item2Router);
-app.use('/item_3', item3Router);
+// app.use('/item_1', item1Router);
+// app.use('/item_2', item2Router);
+// app.use('/item_3', item3Router);
 
 //checkpoint
 app.use((req, res, next) => {
@@ -91,9 +117,9 @@ app.use('/users_table', userTable);
 app.use('/store_table', storeTable);
 app.use('/api/v1/users', usersApi);
 //app.use('/api/v1/store', storeApi);
-//app.use('/item_1', item1Router);
-//app.use('/item_2', item2Router);
-//app.use('/item_3', item3Router);
+app.use('/item_1', item1Router);
+app.use('/item_2', item2Router);
+app.use('/item_3', item3Router);
 
 
 // catch 404 and forward to error handler
