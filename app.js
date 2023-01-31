@@ -97,6 +97,7 @@ app.use('/users', usersRouter);
 app.use('/sing_uo', singupRouter);
 app.use('/logut', logoutRouter);
 //test
+app.use('/api/v1/users', usersApi);
 app.use('/api/v1/store', storeApi);
 // app.use('/item_1', item1Router);
 // app.use('/item_2', item2Router);
@@ -115,7 +116,7 @@ app.use((req, res, next) => {
 app.use('/', secureRouter);
 app.use('/users_table', userTable);
 app.use('/store_table', storeTable);
-app.use('/api/v1/users', usersApi);
+//app.use('/api/v1/users', usersApi);
 //app.use('/api/v1/store', storeApi);
 app.use('/item_1', item1Router);
 app.use('/item_2', item2Router);

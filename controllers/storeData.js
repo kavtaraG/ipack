@@ -4,8 +4,8 @@ var store = [
 
 const getStore = () => (store);
 
-const getStoreById = () => {
-    let temp = store.filter((item) => (item.id == store.id));
+const getStoreById = (id) => {
+    let temp = store.filter((item) => (item.id == id));
     if(temp.length > 0){
         return temp[0];
     }else{

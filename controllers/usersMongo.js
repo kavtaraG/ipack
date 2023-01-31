@@ -89,15 +89,15 @@ const deleteUsers = function(id){
   });
 };
 
-const updateUsers = function(customer){
+const updateUsers = function(users){
   return new Promise((resolve, reject) => {
-    let id = customer.id;
-    delete(customer.id);
+    let id = users.id;
+    delete(users.id);
     MongoClient.connect(url, { useNewUrlParser: true,useUnifiedTopology: true },function(err, client) {
     assert.equal(null, err);
     const db = client.db(dbName);
     const collection = db.collection('users');
-    collection.updateOne({"_id" : ObjectId(id)},{ $set: customer },function(err,result){
+    collection.updateOne({"_id" : ObjectId(id)},{ $set: users },function(err,result){
       resolve({status:'ok'});
       client.close();
        });
@@ -126,7 +126,7 @@ const getUsersBySearch = function(field,searchText){
   });
 }
 //sqlService.getCustomersBySearch(searchParam,callback);
-const getCustomersBySearchOLD = function(searchParam){
+const getUsersSearchOLD = function(searchParam){
   return new Promise((resolve, reject) => {
     var records = [];
     //searhObject = {searchParam.field: '//i'}

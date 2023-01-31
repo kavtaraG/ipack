@@ -25,7 +25,7 @@ const getUsersById = (id) => {
 };
 
 const addUsers = async (record) => {
-   
+    
     record.id = Date.now();
     data.push(record);
 }

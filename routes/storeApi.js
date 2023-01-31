@@ -1,16 +1,16 @@
 const express = require('express');
 const app = express.Router();
-const {getStore, getStoreById, postStore, putStore, deleteStore} = require('../controllers/storeData');
+//const {getStore, getStoreById, postStore, putStore, deleteStore} = require('../controllers/storeData');
+const { getStore, getStoreById, addStore, updateStore, deleteStore } = require('../controllers/store-mongo');
 
 
-
-app.get('/', (req, res, next) => {
-    res.send(getStore());
+app.get('/', async(req, res, next) => {
+    res.send(await getStore(req.body));
 });
 
 
-app.get('/:id', (req, res, next) => {
-    res.send(getStoreById(req.params.id));
+app.get('/:id', async (req, res, next) => {
+    res.send(await getStoreById(req.params.id));
     // let rec = store.filter((id) => (id, req.params.id));
     // if(rec.length > 0){
     //     res.send(rec[0]);
@@ -19,16 +19,17 @@ app.get('/:id', (req, res, next) => {
     // };
 });
 
-app.post('/', (req, res, next) => {
-    res.send(postStore(req.body));
+app.post('/', async (req, res, next) => {
+    res.send(await addStore(req.body));
     // let rec = req.body;
     // rec.id = Date.now();
     // store.push(rec);
     res.send({status: 'ok', msg: 'post success'});
 });
 
-app.put('/', (req, res, next) => {
-    res.send(putStore(req.body));
+app.put('/', async (req, res, next) => {
+    
+    await updateStore(req.body);
     // let rec = req.body;
     // store.map((item, index) => {
     //     if(rec.id == item.id){
@@ -36,11 +37,12 @@ app.put('/', (req, res, next) => {
     //     };
     //     res.send({status: 'ok', msg: 'update success'});
     // });
+    res.send({status: 'ok', msg: 'update success'});
 });
 
 
-app.delete('/', (req, res, next) => {
-    res.send(deleteStore(req.body.id));
+app.delete('/', async (req, res, next) => {
+    res.send(await deleteStore(req.body.id));
     // let rec = req.body.id;
     // let temp = store.filter((id) => (id.id != rec));
     // rec = temp;

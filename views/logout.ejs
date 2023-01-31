@@ -7,14 +7,33 @@
     <title>Document</title>
 </head>
 <body>
+    <script>
+        let doLogout = () => {
+            let username = document.getElementById('username').value;
+            let password = document.getElementById('password').value;
+            let data = {username, password};
+            let response =  fetch('/api/v1/users')
+            .then((response) => response.json())
+            .then((data) => {
+                console.log('Success:', data);
+                return data;
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+            location = '/'
+            
+        }
+       
+    </script>
     <div id="main-div">
         <div id="log-div">
             <label for="Username">Username: </label>
-            <input id="username" placeholder="Username"><br><br>
+            <input id="username" value="<%= logout.username %>" placeholder="Username"><br><br>
             <label for="password">Password: </label>
-            <input id="password" type="password" placeholder="Password"><br><br>
+            <input id="password" value="<%= logout.password %>" type="password" placeholder="Password"><br><br>
  
-            <input id="btn" value="Log out" type="button" onclick="location='/'">
+            <input id="btn" value="Log out" type="button" onclick="doLogout('<%= logout.id %>')">
         </div>
         
     </div>

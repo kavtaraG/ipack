@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 const fs = require('fs');
 
+const { getUsers } = require('../controllers/usersData');
+
 let day = JSON.parse((fs.readFileSync(`${__dirname}/../public/day.json`)));
 let dayMap = day.map((item) => (day, item));
 
@@ -27,6 +29,7 @@ router.get('/login', function(req, res, next) {
 });
 
 router.get('/sing_up', function(req, res, next) {
+
   let users = {};
   //method = 'POST';
   res.render('register', { buttonName: 'Submit', users, day: dayMap,
@@ -34,9 +37,9 @@ router.get('/sing_up', function(req, res, next) {
 });
 
 //log out
-router.get('/logout', function(req, res, next) {
+router.get('/logout', async function(req, res, next) {
   delete(req.session.user);
-  res.render('logout', { title: 'Express' });
+  res.render('logout', { title: 'Express', logout: await getUsers(req.session.user)  });
 });
 
 module.exports = router;

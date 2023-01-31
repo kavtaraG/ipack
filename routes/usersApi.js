@@ -8,7 +8,7 @@ const { getUsers, getUsersById, addUsers, updateUsers, deleteUsers } = require('
 
 app.get('/', async (req, res, next) => {
     //await Users.find().then((result) => {
-        res.send(await getUsers());
+        res.send(await getUsers(req.body));
     });
 
 app.get('/:id', async (req, res, next) => {

@@ -8,16 +8,24 @@
 </head>
 <body>
     <script>
+           
+          
         let doSubmit =  async () => {
             //let id = ""; <% if(users._id){ %> id = "<%= users._id %>";<% } %>;
             let username = document.getElementById('username').value;
             let password = document.getElementById('password').value;
             let firstName = document.getElementById('firstname').value;
             let lastName = document.getElementById('lastname').value;
-            let day = document.getElementById('select-day').value;
-            let mounth = document.getElementById('select-mounth').value;
-            let year = document.getElementById('select-year').value;
-            let country = document.getElementById('select-country').value;
+            let day = document.getElementById('select-day').innerText;
+            let text = '';
+            function dday() {
+                for (let x of Array(day)){
+                    return text += x;
+                };
+            };
+            let mounth = document.getElementById('mounth').innerText;
+            let year = document.getElementById('year').innerText;
+            let country = document.getElementById('country').innerText;
             let data = { username, password, firstName, lastName, day, mounth, year, country };
             let response = await fetch('/api/v1/users', {
                method: 'POST', // or 'PUT'
@@ -39,46 +47,53 @@
                     location = '/users_table';
                 };
                 
+                data.forEach(element => {
+                    if(element.values = ''){
+                        alert('error');
+                        return 0;
+                    }
+                });
         }
+        
     </script>
     
     <div id="header-div">
         <h2>Sing up</h2>
     </div>
-    <div id="reg-div">
+    <div id="reg-div" >
         <label for="username">Username: </label>
-        <input type="text" name="username" id="username" placeholder="Username" value="<%= users.username %>"><br><br>
+        <input type="text" name="username" id="username" placeholder="Username" value="<%= users.username %>" ><br><br>
 
         <label for="password">Password: </label>
-        <input type="password" name="password" id="password" placeholder="Password" value="<%= users.password %>"><br><br>
+        <input type="password" name="password" id="password" placeholder="Password" value="<%= users.password %>" ><br><br>
 
-        <label for="fisrt-name">First name: </label>
-        <input id="firstname" placeholder="John" value="<%= users.firstname %>"><br><br>
+        <label for="Fisrt name">First name: </label>
+        <input id="firstname" placeholder="John" value="<%= users.firstname %>" ><br><br>
 
-        <label for="last-name">First name: </label>
-        <input type="text" id="lastname" placeholder="Doe" value="<%= users.lastname %>"><br><br>
+        <label for="last name">Last name: </label>
+        <input id="lastname" placeholder="Doe" value="<%= users.lastname %>" ><br><br>
 
-        <select id="select-day">
+        <select id="select-day" onchange="dday()">
             <option>Day</option>
             <% for(let i = 0; i < day.length; i++) { %>
             <option id="day" type="text" value="<%= users.day%>"><%= day[i].day %></option>
             <% } %>
         </select>
-        <select id="select-mounth">
+        <select id="select-mounth" >
             <option>Mounth</option>
             <% for(let i = 0; i < mounth.length; i++) {%>
             
             <option id="mounth" type="text" value="<%= users.mounth %>"> <%= mounth[i].mounth %></option>
             <% } %>
         </select>
-        <select id="select-year">
+        <select id="select-year" >
             <option>Year</option>
             <% for(let i = 0; i < year.length; i++) { %>
             <option id="year" type="text" value="<%= users.year %>"><%= year[i].year %></option>
             <% } %>
         </select><br><br>
 
-        <select id="select-country">
+        <select id="select-country" >
             <option >Select country</option>
             <% for(let i = 0; i < country.length; i++) { %>
                 <option id="country" type="text" value="<%= users.country %>"><%= country[i].text %></option>

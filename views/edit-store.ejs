@@ -1,0 +1,48 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let doEdit = async () => {
+            let id = document.getElementById('id').value;
+            let name = document.getElementById('name').value;
+            let origin = document.getElementById('origin').value;
+            let items = document.getElementById('items').value;
+            let price = document.getElementById('price').value;
+            let qnt = document.getElementById('qnt').value;
+            let data = { id, name, origin, items, price, qnt };
+            let response = await fetch('/api/v1/store', {
+                method: 'PUT', // or 'PUT'
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    // console.log('Success:', data);
+                    return data;
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        }        
+    </script>
+    <div id="main-div">
+       
+       <div id="input-div">
+       <input id="id" value='<%= record._id %>' readonly><br><br>
+        <input id="name" value='<%= record.name %>' readonly><br><br>
+        <input id="origin"  value='<%= record.origin %>' readonly><br><br>
+        <input id="items" type="number" value='<%= record.items %>' ><br><br>
+        <input id="price" value='<%= record.price %> '  readonly><br><br>
+        <input id="qnt" value='<%= record.qnt %>' placeholder="Enter Quantity Number"><br><br>
+        <input id="btn1" type="button" value="Edit" onclick="doEdit()">
+       </div>
+    </div>
+</body>
+</html>

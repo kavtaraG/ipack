@@ -29,7 +29,10 @@
                 });
             if(response.result == 'ok'){
                 location='/'
-            }else{
+            }else if(typeof username == undefined || !username && typeof password == undefined || !password){
+                alert('fields are empty');
+            }
+            else{
                 alert('denied');
             }
             

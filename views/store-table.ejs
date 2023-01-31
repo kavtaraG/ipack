@@ -16,7 +16,7 @@ const doEdit =  (id)=>{
         location = '/store_table/edit/'+id;
       }
 
-  const doDelete = async (id) => {å
+  const doDelete = async (id) => {
     await fetch('/api/v1/store', {
         method: 'DELEtE', // or 'PUT'
         headers: {
@@ -52,14 +52,14 @@ const doEdit =  (id)=>{
                </tr>
                <% if(data.length){for(var i = 0;i < data.length;i++) { %>       
                <tr>
-                   <td><%=data[i].id%></td>
+                   <td><%=data[i]._id%></td>
                    <td><%=data[i].name%></td>
                    <td><%=data[i].origin%></td>
                    <td><%=data[i].items%></td>
                    <td><%=data[i].price%></td>
                    <td><%=data[i].quantity%></td>
-                   <td><button onclick="doEdit('<%=data[i].id%>');" >Edit</button></td>
-                   <td><button onclick="doDelete('<%=data[i].id %>');">Delete</button></td>
+                   <td><button onclick="doEdit('<%=data[i]._id%>');" >Edit</button></td>
+                   <td><button onclick="doDelete('<%=data[i]._id %>');">Delete</button></td>
                </tr>
            <% }
             }else{ %>
