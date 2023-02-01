@@ -5,14 +5,14 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const http = require('http');
 const dotenv = require('dotenv');
-const mongoose = require('mongoose');
-const MongoClient = require('mongodb').MongoClient;
+// const mongoose = require('mongoose');
+//const MongoClient = require('mongodb').MongoClient;
 
 
-const Users = require('./model/usersSchema');
+
 
 dotenv.config({path: './config.env'});
-mongoose.set('strictQuery', true);
+// mongoose.set('strictQuery', true);
 
 // const DB = process.env.DB.replace('<PASSWORD>', process.env.PASSWORD);
 
@@ -24,28 +24,29 @@ mongoose.set('strictQuery', true);
 const DB_LOCAL = process.env.DATABASE_LOCAL;
 const DB_LOCAL_STORE = process.env.DB_LOCAL_STORE;
 
-//testing mongo database users collection
-MongoClient.connect(DB_LOCAL, {useUnifiedTopology: true}, 
-    (err, client) => {
-        if(err) throw err;
 
-        var db = client.db('users');
-        db.collection('users').find().toArray((err, result) => {
-            if(err) throw err;
-            console.log(result);
-        });
-    });
-//testing mongo database store collection
-    MongoClient.connect(DB_LOCAL_STORE, {useUnifiedTopology: true}, 
-      (err, client) => {
-          if(err) throw err;
+//testing mongo database users collection
+// MongoClient.connect(DB_LOCAL, {useUnifiedTopology: true}, 
+//     (err, client) => {
+//         if(err) throw err;
+
+//         var db = client.db('users');
+//         db.collection('users').find().toArray((err, result) => {
+//             if(err) throw err;
+//             console.log(result);
+//         });
+//     });
+// //testing mongo database store collection
+//     MongoClient.connect(DB_LOCAL_STORE, {useUnifiedTopology: true}, 
+//       (err, client) => {
+//           if(err) throw err;
   
-          var db = client.db('users');
-          db.collection('store').find().toArray((err, result) => {
-              if(err) throw err;
-              console.log(result);
-          });
-      });
+//           var db = client.db('users');
+//           db.collection('store').find().toArray((err, result) => {
+//               if(err) throw err;
+//               console.log(result);
+//           });
+//       });
 
 //console.log(Users);
 const session = require('cookie-session');
@@ -84,7 +85,7 @@ app.use(session(sess));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-mongoose.set('strictQuery', true);
+//mongoose.set('strictQuery', true);
 
 app.use(logger('dev'));
 app.use(express.json());

@@ -45,7 +45,7 @@ router.get('/', function(req, res, next) {
   //store routes
   router.get('/item_1', async function(req, res, next) {
     let product = await getStore();
-    // let item = {};
+    let item = {};
     res.render('item1', { item, item: product, user: req.session.user});
   });
 
@@ -53,9 +53,9 @@ router.get('/', function(req, res, next) {
     router.get('/store_table/edit/:id', async function(req, res, next) {
       console.log("id is ",req.params.id);
       let record =  await getStoreById(req.params.id);
-      let data = {};
+      let item = {};
       //method = 'PUT';
-      res.render('item1', {  store: record, data , record});
+      res.render('item1', {  record, item });
     });
 
   router.get('/item_2', async function(req, res, next) {

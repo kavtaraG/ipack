@@ -42,7 +42,11 @@ const userSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         required: [Date.now()]
-    }
+    },
+    // role:{
+    //     type:String,
+    //     default: 'user'
+    // }
 });
 
 const Users = mongoose.model('Users', userSchema);

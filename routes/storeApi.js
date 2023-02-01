@@ -1,16 +1,52 @@
 const express = require('express');
+const MongoClient = require('mongodb').MongoClient;
+const dotenv = require('dotenv');
+
+dotenv.config({path: '../config.env'});
+
 const app = express.Router();
 //const {getStore, getStoreById, postStore, putStore, deleteStore} = require('../controllers/storeData');
 const { getStore, getStoreById, addStore, updateStore, deleteStore } = require('../controllers/store-mongo');
 
 
+const DB = process.env.DATABASE_LOCAL;
+const dbName = process.env.DB_USERS;
+
 app.get('/', async(req, res, next) => {
-    res.send(await getStore(req.body));
+    try{
+        MongoClient.connect(DB, (err, client) => {
+            if(err) throw err;
+
+            var db = client.db(dbName);
+            db.collection('store').find(req.query).toArray((err, result) => {
+                if(err) throw err;
+                console.log(result);
+            });
+        });
+        res.send(await getStore());
+    }catch(err){
+        if(err) throw err;
+    };
+    
 });
 
 
 app.get('/:id', async (req, res, next) => {
-    res.send(await getStoreById(req.params.id));
+    try{
+        MongoClient.connect(DB, (err, client) => {
+            if(err) throw err;
+
+            var db = client.db(dbName);
+            db.collection('store').find(req.params.id).toArray((err, result) => {
+                if(err) throw err;
+                console.log(result);
+            });
+        });
+        res.send(await getStoreById(req.params.id));
+    }catch(err){
+        if(err) throw err;
+    };
+    
     // let rec = store.filter((id) => (id, req.params.id));
     // if(rec.length > 0){
     //     res.send(rec[0]);

@@ -8,9 +8,7 @@ dotenv.config({path: '../config.env'});
 
 
 
-// const dbName = 'nodejs';
-// const dbName = process.env.DBNAME;
-//const dbName = process.env.DATABASE_LOCAL;
+
 const dbName = 'users';
 const url = 'mongodb://localhost:27017';
 
@@ -144,7 +142,41 @@ const getUsersSearchOLD = function(searchParam){
   });
 }
 
-module.exports = {getUsers,addUsers,updateUsers,deleteUsers,getUsersById};
+const authUsers = function (field, username, password) {
+  return new Promise((resolve, reject) => {
+      var records = [];
+      // console.log("field:" + field);
+      // console.log("email:" + email);
+
+      MongoClient.connect(url, {
+          useNewUrlParser: true
+      }, function (err, client) {
+          assert.equal(null, err);
+          const db = client.db(dbName);
+          db.collection('users').find({
+              [field]: {
+                  '$regex': username,
+                  '$options': 'i'
+              }
+          }).toArray(function (err, result) {
+              if (err) throw err
+              console.log("result:" + JSON.stringify(result));
+              // console.log("==========password:" + result[0]['password']);
+
+              if ((username===result[0]['username']) && (password === result[0]['password'])) {
+                  // resolve(1);
+                  resolve(result);
+              } else {
+                  resolve(0)
+
+              }
+              client.close();
+          });
+      });
+  });
+}
+
+module.exports = { getUsers,addUsers,updateUsers,deleteUsers,getUsersById, authUsers };
 
 
 
