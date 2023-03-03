@@ -65,7 +65,7 @@
             let lastName = document.getElementById('lastname').value;
             let day = document.getElementById('select-day').innerText;
             let mounth = document.getElementById('mounth').innerText;
-            let year = document.getElementById('year').innerText;
+            let year = document.getElementById('year').value;
             let country = document.getElementById('country').value;
             let data = { username, password, firstName, lastName, day, mounth, year, country };
             let response = await fetch('/api/v1/users', {
@@ -118,30 +118,30 @@
 
         <select id="select-day">
             <option disabled selected>Day</option>
-            <% for(let i = 0; i < day.length; i++) { %>
-            <option id="day" type="text" value="<%= users.day%>"><%= day[i].day %></option>
-            <% } %>
+            <% day.forEach(function(day) { %>
+                <option id="day" type="text" value="<%= users.day%>"><%= day.day %></option>
+            <% }) %>
         </select>
         <select id="select-mounth" >
             <option disabled selected>Mounth</option>
-            <% for(let i = 0; i < mounth.length; i++) {%>
-            
-            <option id="mounth" type="text" value="<%= users.mounth %>"> <%= mounth[i].mounth %></option>
-            <% } %>
+            <% mounth.forEach(function(mounth) { %>
+                <option id="mounth" type="text" value="<%= users.mounth %>"> <%= mounth.mounth %></option>
+            <% }) %>
         </select>
         <select id="select-year" type="text">
             <option disabled selected>Year</option>
-            <% for(let i = 0; i < year.length; i++) { %>
-            <option id="year" type="text" value="<%= users.year %>"><%= year[i].year %></option>
-            <% } %>
+            
+           <% year.forEach(function(year) { %>
+            <option><%= year.year %></option>
+          <% }) %>
         </select><br><br>
 
       
 
         <select id="country" type="text">
             <option value="<%=users.country %>" disabled selected>Select Country</option>
-            <% enviroments.forEach(function(enviroment) { %>
-                <option><%= enviroment.text %></option>
+            <% country.forEach(function(country) { %>
+                <option><%= country.text %></option>
             <% }) %>
         </select><br><br>
 

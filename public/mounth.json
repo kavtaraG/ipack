@@ -1,14 +1,14 @@
 [
-    {"mounth": 1},
-    {"mounth": 2},
-    {"mounth": 3},
-    {"mounth": 4},
-    {"mounth": 5},
-    {"mounth": 6},
-    {"mounth": 7},
-    {"mounth": 8},
-    {"mounth": 9},
-    {"mounth": 10},
-    {"mounth": 11},
-    {"mounth": 12}
+    {"mounth": "January"},
+    {"mounth": "February"},
+    {"mounth": "March"},
+    {"mounth": "April"},
+    {"mounth": "May"},
+    {"mounth": "June"},
+    {"mounth": "July"},
+    {"mounth": "August"},
+    {"mounth": "September"},
+    {"mounth": "Octomber"},
+    {"mounth": "November"},
+    {"mounth": "December"}
 ]

@@ -32,9 +32,8 @@ router.get('/sing_up', function(req, res, next) {
 
   let users = {};
   //method = 'POST';
-  let enviroments = {};
-  res.render('register', { buttonName: 'Submit', users, enviroments, day: dayMap,
-  mounth: mounthMap, year: yearMap, /*country: countryMap*/ enviroments: countryMap });
+  res.render('register', { buttonName: 'Submit', users, day: dayMap,
+  mounth: mounthMap, year: yearMap, country: countryMap });
 });
 
 //log out
