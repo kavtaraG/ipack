@@ -15,6 +15,8 @@ router.post('/login', async function(req, res, next) {
   let result = await authUsers('username',req.body.username,req.body.password);
   console.log('++++++result ',result);
   console.log('++++++_id ',result[0]['_id']);
+  console.log('****** username::', result[0]['username']);
+  console.log('****** password::', result[0]['username']);
   res.cookie('userId',result[0]['_id'])
   let role = result[0]['role'];
 

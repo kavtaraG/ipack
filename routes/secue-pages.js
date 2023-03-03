@@ -32,7 +32,7 @@ router.get('/', function(req, res, next) {
     let users =  await getUsersById(req.params.id);
     method = 'PUT';
     res.render('register', { method, buttonName: 'Edit', users: users,
-    day: dayMap, mounth: mounthMap, year: yearMap, country: countryMap   });
+    day: dayMap, mounth: mounthMap, year: yearMap, country: countryMap });
   });
 
   //store table

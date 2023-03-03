@@ -8,7 +8,55 @@
 </head>
 <body>
     <script>
-           
+        
+        // let usernameInput = () => {
+        //     let username = document.getElementById('username');
+        //     if(username == ''){
+        //         alert('Username is empty');
+        //         return false;
+        //     }else{
+        //         return;
+        //     };
+        // };
+        // //document.getElementById('username') = usernameInput();
+        // usernameInput();
+
+        // let passwordInput = () => {
+        //     let password = document.getElementById('password');
+        //     if(password == ''){
+        //         alert('Password is empty');
+        //         return false;
+        //     }else{
+        //         return;
+        //     }
+        // };
+        // //document.getElementById('password').value = passwordInput();
+
+        // let fisrtnameInput = () => {
+        //     let firstName = document.getElementById('firstname');
+        //     if(firstName == ''){
+        //         alert('Fisrt name is empty');
+        //         return false;
+        //     }else{
+        //         return;
+        //     };
+        // };
+        // //document.getElementById('firstname').value = fisrtnameInput();
+
+        // let lastnameInput = () => {
+        //     let lastName = document.getElementById('lastname');
+        //     if(lastName == ''){
+        //         alert('Last name is empty');
+        //         return false;
+        //     }else{
+        //         return;
+        //     };
+        // };
+        // //document.getElementById('lastname').value = lastnameInput();
+
+      
+      
+
         let doSubmit =  async () => {
             //let id = ""; <% if(users._id){ %> id = "<%= users._id %>";<% } %>;
             let username = document.getElementById('username').value;
@@ -18,7 +66,7 @@
             let day = document.getElementById('select-day').innerText;
             let mounth = document.getElementById('mounth').innerText;
             let year = document.getElementById('year').innerText;
-            let country = document.getElementById('country').innerText;
+            let country = document.getElementById('country').value;
             let data = { username, password, firstName, lastName, day, mounth, year, country };
             let response = await fetch('/api/v1/users', {
                method: 'POST', // or 'PUT'
@@ -41,12 +89,14 @@
                 };
                 
                 data.forEach(element => {
-                    if(element.values = ''){
+                    if(element.length == ''){
                         alert('error');
-                        return 0;
-                    }
+                        return false;
+                    }else{
+                        return true;
+                    };
                 });
-        }
+        };
         
     </script>
     
@@ -66,31 +116,33 @@
         <label for="last name">Last name: </label>
         <input id="lastname" placeholder="Doe" value="<%= users.lastname %>" ><br><br>
 
-        <select id="select-day" >
-            <option>Day</option>
+        <select id="select-day">
+            <option disabled selected>Day</option>
             <% for(let i = 0; i < day.length; i++) { %>
             <option id="day" type="text" value="<%= users.day%>"><%= day[i].day %></option>
             <% } %>
         </select>
         <select id="select-mounth" >
-            <option>Mounth</option>
+            <option disabled selected>Mounth</option>
             <% for(let i = 0; i < mounth.length; i++) {%>
             
             <option id="mounth" type="text" value="<%= users.mounth %>"> <%= mounth[i].mounth %></option>
             <% } %>
         </select>
-        <select id="select-year" >
-            <option>Year</option>
+        <select id="select-year" type="text">
+            <option disabled selected>Year</option>
             <% for(let i = 0; i < year.length; i++) { %>
             <option id="year" type="text" value="<%= users.year %>"><%= year[i].year %></option>
             <% } %>
         </select><br><br>
 
-        <select id="select-country" >
-            <option >Select country</option>
-            <% for(let i = 0; i < country.length; i++) { %>
-                <option id="country" type="text" value="<%= users.country %>"><%= country[i].text %></option>
-            <% } %>
+      
+
+        <select id="country" type="text">
+            <option value="<%=users.country %>" disabled selected>Select Country</option>
+            <% enviroments.forEach(function(enviroment) { %>
+                <option><%= enviroment.text %></option>
+            <% }) %>
         </select><br><br>
 
         <div id="btns">
